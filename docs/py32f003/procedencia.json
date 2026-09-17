@@ -1,0 +1,22 @@
+{
+  "repositorio": "https://github.com/UNIT-Electronics-MX/unit_devlab_py32f003l24d6tr_development_board",
+  "archivos": {
+    "placa-superior.png": "hardware/resources/unit_top_v_0_0_1_ue0102_PY32f003L24D6TR_devlab.png",
+    "placa-inferior.png": "hardware/resources/unit_btm_v_0_0_1_ue0102_PY32f003L24D6TR_devlab.png",
+    "topologia.png": "hardware/resources/unit_topology_v_0_0_1_ue0102_PY32f003L24D6TR_devlab.png",
+    "dimensiones.png": "hardware/resources/unit_dimension_v_0_0_1_ue0102_PY32f003L24D6TR_devlab.png",
+    "pinout-es.png": "hardware/resources/pinout/unit_pinout_v_0_0_1_ue0102_py32f003_es.png",
+    "pinout-es.pdf": "hardware/resources/pinout/unit_pinout_v_0_0_1_ue0102_py32f003_es.pdf",
+    "esquematico.pdf": "hardware/unit_schematic_v_0_0_1_ue0102_PY32f003L24D6TR_devlab.pdf",
+    "manual-placa-en.pdf": "hardware/unit_datasheet_v_0_0_1_ue0102_py32f003_en.pdf",
+    "gestor-placas.jpg": "software/sphinx/src/source/_static/board-manager.jpg",
+    "seleccion-placa.jpeg": "software/sphinx/src/source/_static/board-py32.jpeg",
+    "programador-pyocd.jpeg": "software/sphinx/src/source/_static/pyocd-debugger.jpeg",
+    "conexion-swd.jpeg": "software/sphinx/src/source/_static/result.jpeg",
+    "carga-firmware.png": "software/sphinx/src/source/_static/upload_firmware.png",
+    "blink.gif": "software/sphinx/src/source/_static/blink.gif",
+    "uart.png": "software/sphinx/src/source/_static/uart.png",
+    "adc-pa2.png": "software/sphinx/src/source/_static/adc_pa2.png",
+    "PY32F003_Datasheet_Rev1.7.pdf": "software/sphinx/src/source/_static/PY32F003_Datasheet_Rev1.7.pdf"
+  }
+}
