@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ESP32-C6 Pulsar Labs
+title: Cortex-M · DevLab PY32F003
 sidebar: false
 aside: false
 ---

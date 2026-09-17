@@ -1,249 +1,127 @@
-# ESP32-C6 Pulsar Labs
+# Cortex-M · DevLab PY32F003
 
-Documentación y prácticas de laboratorio para **adquisición de datos e IoT** con ESP32-C6 y la placa Pulsar C6.
+Documentación en español para un taller de **compilación, programación SWD y
+validación de firmware** con **Arduino IDE** y **DevLab PY32F003L24D6TR**.
+El sitio conserva el formato VitePress y el diseño visual de la documentación
+original de Cortex.
 
-## Contenido del curso
+## Comenzar el taller
 
-### Conceptos teóricos
+1. [Plan del taller de dos horas](docs/guide/taller.md).
+2. [Primeros pasos con PY32F003](docs/py32f003-getting-started/index.md).
+3. [Instalación de Arduino IDE y pyOCD](docs/py32f003-getting-started/02_0_duino.md).
+4. [Pinout, alimentación y esquemático](docs/py32f003-getting-started/03_pinout.md).
+5. [Prácticas y descargas](docs/examples/index.md).
 
-- **[Adquisición de datos](./docs/guide/data-acquisition.md)**: Fundamentos de DAQ, muestreo, resolución
-- **[Sensores y transductores](./docs/guide/sensors.md)**: Tipos de sensores, conexión, calibración
-- **[ADC y DAC](./docs/guide/adc-dac.md)**: Conversión analógica-digital en ESP32-C6
-- **[Acondicionamiento de señal](./docs/guide/signal-conditioning.md)**: Amplificación, filtrado, protección
-- **[Comunicación I²C](./docs/guide/i2c.md)**: Protocolo I²C para sensores digitales
-- **[Comunicación SPI](./docs/guide/spi.md)**: Protocolo SPI de alta velocidad
-- **[Wi-Fi y Bluetooth LE](./docs/guide/connectivity.md)**: Conectividad inalámbrica
-- **[Plataformas IoT](./docs/guide/iot-platforms.md)**: ThingSpeak, MQTT, Firebase, AWS IoT
+## Configuración de referencia
 
-### Prácticas de laboratorio
+| Elemento | Configuración |
+| --- | --- |
+| Microcontrolador | PY32F003L24D6TR, ARM Cortex-M0+ |
+| Memoria | 16 KB de Flash y 2 KB de RAM |
+| Paquete Arduino | UNIT Electronics PY32 0.1.7 |
+| Placa y variante | DevLab PY32F003 Board → PY32F003x4 |
+| Reloj | HSI 24Mhz, HCLK 24Mhz |
+| Alimentación del MCU | VCC a 3.3 V |
+| Programación | CMSIS-DAP (pyOCD), mediante SWD |
 
-1. **[Lab 1: Sensores I²C](./docs/examples/lab01-i2c-sensors.md)** - Lectura de sensores digitales (BME280)
-2. **[Lab 2: Pantalla OLED](./docs/examples/lab02-oled-display.md)** - Visualización de datos en pantalla
-3. **[Lab 3: ADC analógico](./docs/examples/lab03-adc.md)** - Conversión de señales analógicas
-4. **[Lab 4: Publicación Wi-Fi](./docs/examples/lab04-wifi.md)** - Envío de datos a la nube
-5. **[Lab 5: Bluetooth LE](./docs/examples/lab05-ble.md)** - Comunicación con dispositivos móviles
+Instala el paquete en Arduino IDE con la URL indicada en la guía. Para el LED,
+comprueba el puente **LED Enable**; para UART utiliza un adaptador USB-UART de
+3.3 V. La variante **x4** corresponde a la memoria del modelo L24D6TR.
 
-## Inicio rápido
+## Ejemplos incluidos
 
-### Requisitos previos
+| Ejemplo | Uso |
+| --- | --- |
+| `01_blink` | Parpadeo del LED PB5 |
+| `02_entrada_digital` | Pulsador externo en PA2 |
+| `03_uart` | Mensajes y eco por PA0/PA1 |
+| `04_adc` | Lectura de PA2 a 12 bits y umbral del LED |
+| `05_validacion` | Falla lógica, corrección y recuperación |
 
-- **Hardware**: Placa Pulsar C6 (ESP32-C6)
-- **Software**: 
-  - Python 3.8+
-  - ESP-IDF v5.1+
-  - Node.js 22+ (para documentación)
+Los sketches están en [docs/public/examples/py32f003](docs/public/examples/py32f003).
+Las páginas muestran esos mismos archivos como fragmentos de código; el
+[ZIP descargable](docs/public/examples/py32f003-ejemplos.zip) contiene una
+carpeta independiente por ejemplo.
 
-### Instalación de ESP-IDF
+## Ver la documentación localmente
 
-#### Linux (Ubuntu/Debian)
-
-```bash
-# Instalar dependencias
-sudo apt-get update
-sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
-
-# Clonar ESP-IDF
-mkdir -p ~/esp
-cd ~/esp
-git clone --recursive https://github.com/espressif/esp-idf.git
-
-# Instalar herramientas
-cd ~/esp/esp-idf
-./install.sh esp32c6
-
-# Activar entorno (agregar a .bashrc)
-. $HOME/esp/esp-idf/export.sh
-```
-
-#### Windows
-
-1. Descargar [ESP-IDF Tools Installer](https://dl.espressif.com/dl/esp-idf/)
-2. Ejecutar instalador y seleccionar ESP32-C6
-3. Abrir "ESP-IDF PowerShell" desde el menú inicio
-
-### Ver documentación
+Requiere **Node.js 22 o posterior**. Desde la raíz del repositorio:
 
 ```bash
-# Clonar este repositorio
-git clone https://github.com/tu-usuario/unit_devlab_esp32_examples.git
-cd unit_devlab_esp32_examples
-
-# Instalar dependencias de documentación
-npm install
-
-# Ejecutar servidor de documentación
-npm run docs:dev
+cd docs
+npm ci
+npm run dev
 ```
 
-Abre [http://localhost:5173](http://localhost:5173) en tu navegador.
+Abre la dirección local que indique VitePress, normalmente
+[http://localhost:5173](http://localhost:5173).
 
-### Compilar primer ejemplo
+Para compilar y previsualizar el sitio:
 
 ```bash
-# Copiar ejemplo básico
-cd ~/esp
-cp -r $IDF_PATH/examples/get-started/hello_world .
-cd hello_world
-
-# Configurar target ESP32-C6
-idf.py set-target esp32c6
-
-# Compilar
-idf.py build
-
-# Flashear (ajusta el puerto)
-idf.py -p /dev/ttyUSB0 flash monitor
+cd docs
+npm run build
+npm run preview
 ```
 
-## Estructura del repositorio
-
-```
-.
-├── docs/
-│   ├── index.md                    # Página principal
-│   ├── guide/                      # Guías teóricas
-│   │   ├── esp32c6.md              # Configuración ESP32-C6
-│   │   ├── esp-idf.md              # Guía ESP-IDF
-│   │   ├── data-acquisition.md     # Adquisición de datos
-│   │   ├── sensors.md              # Sensores y transductores
-│   │   ├── adc-dac.md              # ADC y DAC
-│   │   ├── signal-conditioning.md  # Acondicionamiento de señal
-│   │   ├── i2c.md                  # Comunicación I²C
-│   │   ├── spi.md                  # Comunicación SPI
-│   │   ├── connectivity.md         # Wi-Fi y Bluetooth LE
-│   │   └── iot-platforms.md        # Plataformas IoT
-│   └── examples/                   # Prácticas de laboratorio
-│       ├── lab01-i2c-sensors.md
-│       ├── lab02-oled-display.md
-│       ├── lab03-adc.md
-│       ├── lab04-wifi.md
-│       └── lab05-ble.md
-├── examples/                       # Código fuente (a crear)
-└── package.json                    # Configuración npm
-```
-
-## Crear tu primer proyecto
-
-### Proyecto desde plantilla
+`cd docs` se ejecuta desde la raíz del repositorio. Los comandos de npm
+pertenecen a esa carpeta. Para una instalación bajo un subdirectorio:
 
 ```bash
-cd ~/esp
-cp -r $IDF_PATH/examples/get-started/hello_world mi_proyecto
-cd mi_proyecto
-
-idf.py set-target esp32c6
-idf.py build
-idf.py -p /dev/ttyUSB0 flash monitor
+BASE_PATH=/unit_devlab_cortex_m_examples/ npm run build
 ```
 
-### Proyecto desde cero
+El flujo existente de GitHub Pages configura `BASE_PATH` según el nombre
+del repositorio.
+
+## Actualizar los ejemplos descargables
+
+Después de modificar un sketch, ejecuta desde la raíz:
 
 ```bash
-mkdir mi_proyecto
-cd mi_proyecto
-
-# Crear estructura
-mkdir -p main
-touch main/main.c main/CMakeLists.txt CMakeLists.txt
+python3 scripts/prepare-workshop.py
 ```
 
-**CMakeLists.txt** (raíz):
-```cmake
-cmake_minimum_required(VERSION 3.16)
-include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-project(mi_proyecto)
+Este comando regenera el ZIP con los mismos archivos que presenta el sitio.
+No genera ni publica firmware para una placa conectada.
+
+## Estructura
+
+```text
+README.md
+scripts/prepare-workshop.py
+archive/pulsar-c6/            Material anterior de Pulsar y ESP32-C6
+docs/
+  .vitepress/                Tema, componentes y navegación
+  guide/                     Taller, arquitectura y compilación
+  py32f003-getting-started/   Inicio, periféricos y recursos
+  examples/                  Guías de las cinco prácticas
+  public/
+    py32f003/                Imágenes, pinout y documentos de la placa
+    examples/                Sketches, ZIP y registro de validación
 ```
 
-**main/CMakeLists.txt**:
-```cmake
-idf_component_register(SRCS "main.c"
-                      INCLUDE_DIRS ".")
-```
+## Recursos y procedencia
 
-**main/main.c**:
-```c
-#include <stdio.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "esp_log.h"
+Las imágenes, capturas y PDF proceden de
+[DevLab PY32F003 Development Board](https://github.com/UNIT-Electronics-MX/unit_devlab_py32f003l24d6tr_development_board).
+La correspondencia de archivos se conserva en
+[procedencia.json](docs/public/py32f003/procedencia.json).
 
-void app_main(void)
-{
-    ESP_LOGI("MAIN", "¡Hola ESP32-C6!");
-}
-```
+La información del modelo L24D6 se contrastó con la tabla 1-4 de la hoja de
+datos PY32F003 revisión 1.7 y con los archivos del paquete Arduino 0.1.7.
+Los recursos conservan sus créditos y avisos originales.
 
-Compilar y flashear:
-```bash
-idf.py set-target esp32c6
-idf.py build
-idf.py -p /dev/ttyUSB0 flash monitor
-```
+El material anterior de Pulsar C6 permanece en `archive/pulsar-c6/`, fuera
+del sitio del taller. El repositorio de Development Board se conserva intacto.
 
-## Solución de problemas
+## Validación
 
-### "No module named 'serial'"
-```bash
-pip install pyserial
-```
+Los cinco sketches compilan para PY32F003x4 con el paquete 0.1.7, HSI de
+24 MHz y configuración de 3.3 V. El paquete emite una advertencia propia
+sobre `READ_BIT` en `system_py32f0xx.c`; no impide estas compilaciones.
+Consulta [las notas de compilación](docs/guide/compilacion.md) para ver los tamaños.
 
-### "Permission denied /dev/ttyUSB0" (Linux)
-```bash
-sudo usermod -a -G dialout $USER
-# Cerrar sesión y volver a iniciar
-```
-
-### "Failed to connect to ESP32-C6"
-1. Mantener presionado botón **BOOT**
-2. Presionar y soltar **RESET**
-3. Soltar **BOOT**
-4. Ejecutar `idf.py flash` nuevamente
-
-## Recursos adicionales
-
-### Documentación oficial
-- [ESP32-C6 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-c6_datasheet_en.pdf)
-- [ESP-IDF Programming Guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32c6/)
-- [ESP-IDF API Reference](https://docs.espressif.com/projects/esp-idf/en/latest/esp32c6/api-reference/index.html)
-
-### Herramientas
-- [nRF Connect](https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile) - App BLE
-- [MQTT Explorer](http://mqtt-explorer.com/) - Cliente MQTT
-- [ThingSpeak](https://thingspeak.com/) - Plataforma IoT
-
-### Comunidad
-- [Espressif Forum](https://esp32.com/)
-- [ESP32 Reddit](https://www.reddit.com/r/esp32/)
-- [GitHub Discussions](https://github.com/espressif/esp-idf/discussions)
-
-## Contribuir
-
-¿Encontraste un error o quieres agregar contenido?
-
-1. Fork el repositorio
-2. Crea una rama (`git checkout -b feature/mejora`)
-3. Commit tus cambios (`git commit -am 'Agregar mejora'`)
-4. Push a la rama (`git push origin feature/mejora`)
-5. Abre un Pull Request
-
-## Licencia
-
-Este proyecto está bajo licencia MIT. Ver archivo `LICENSE` para más detalles.
-
-## Créditos
-
-Curso desarrollado para la asignatura de **Adquisición de Datos** con ESP32-C6 y Pulsar C6.
-
-### Temas cubiertos
-- Conceptos generales de adquisición de datos
-- Sensores y transductores
-- Conversión analógica y digital (ADC y DAC)
-- Acondicionamiento de señal con op-amps y filtros
-- Comunicación con sensores (I²C y SPI)
-- Sistemas embebidos para adquisición de datos
-- Conectividad Wi-Fi y Bluetooth LE
-- Introducción a plataformas IoT
-
----
-
-**Feliz codificación con ESP32-C6.**
+La carga SWD, las tensiones y el comportamiento físico requieren comprobación
+en las estaciones del taller. Esta revisión no implica validación en hardware.

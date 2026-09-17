@@ -6,7 +6,7 @@ import Cards from './Cards.vue'
 const { isDark } = useData()
 
 const skillsIcons =
-  'windows,linux,ubuntu,python,vscode,bash,powershell,arduino'
+  'windows,linux,python,arduino'
 
 const skillsSrc = computed(() => {
   const baseUrl = `https://skillicons.dev/icons?i=${skillsIcons}`
@@ -18,24 +18,24 @@ const skillsSrc = computed(() => {
 
 const featureCards = [
   {
-    title: 'Adquisición de datos',
-    description:
-      'Aprende a trabajar con sensores, ADC/DAC, acondicionamiento de señal y conversión analógica-digital.',
+    title: 'Arquitectura Cortex-M',
+    description: 'Conoce el núcleo ARM Cortex-M0+, la memoria y los periféricos del PY32F003.',
+    link: '/guide/cortex-m',
   },
   {
-    title: 'Comunicación de sensores',
-    description:
-      'Interfaces I²C y SPI para lectura de sensores digitales y visualización en pantallas OLED.',
+    title: 'Arduino IDE',
+    description: 'Prepara el entorno, compila tu primer programa y cárgalo mediante CMSIS-DAP y SWD.',
+    link: '/py32f003-getting-started/02_0_duino',
   },
   {
-    title: 'Conectividad IoT',
-    description:
-      'Wi-Fi y Bluetooth LE para publicación de datos y comunicación con dispositivos móviles y plataformas IoT.',
+    title: 'Primeros ejemplos',
+    description: 'Practica con el LED integrado, una entrada digital, comunicación UART y lectura analógica.',
+    link: '/examples/',
   },
   {
-    title: 'Placa Pulsar C6',
-    description:
-      'Ejemplos específicos optimizados para la placa Pulsar C6 basada en ESP32-C6 con soporte RISC-V.',
+    title: 'Prueba y validación',
+    description: 'Modifica el firmware, reproduce una falla y registra cómo comprobaste la corrección.',
+    link: '/examples/lab05-validacion',
   },
 ]
 </script>
@@ -46,7 +46,7 @@ const featureCards = [
       <!-- Placa superior izquierda -->
       <img
         class="corner-board corner-board-left"
-        :src="withBase('/pulsar-c6.png')"
+        :src="withBase('/py32f003/placa-superior.png')"
         alt=""
         aria-hidden="true"
       />
@@ -54,30 +54,30 @@ const featureCards = [
       <!-- Placa superior derecha -->
       <img
         class="corner-board corner-board-right"
-        :src="withBase('/pulsar-c6.png')"
+        :src="withBase('/py32f003/placa-inferior.png')"
         alt=""
         aria-hidden="true"
       />
 
       <div class="hero">
-        <h1>ESP32-C6 Pulsar Labs</h1>
+        <h1>Cortex-M<br />DevLab PY32F003</h1>
 
         <p class="description">
-          Documentación práctica para aprender adquisición de datos,
-          sensores, comunicación I²C/SPI, Wi-Fi, Bluetooth LE y plataformas
-          IoT con la placa Pulsar C6.
+          Aprende a compilar, programar y validar firmware con Arduino IDE
+          y la placa DevLab PY32F003. Un taller en español para comenzar
+          con sistemas embebidos ARM Cortex-M0+.
         </p>
 
         <div class="actions">
           <a
-            :href="withBase('/pulsar-c6-getting-started')"
+            :href="withBase('/py32f003-getting-started/')"
             class="btn primary"
           >
-            Primeros pasos con la Pulsar C6
+            Primeros pasos con PY32F003
           </a>
 
           <a
-            :href="withBase('/examples')"
+            :href="withBase('/examples/')"
             class="btn secondary"
           >
             Ver prácticas
@@ -91,7 +91,7 @@ const featureCards = [
             <img
               :key="skillsSrc"
               :src="skillsSrc"
-              alt="Windows, Linux, Ubuntu, Python, Visual Studio Code, Bash, PowerShell y Arduino"
+              alt="Windows, Linux, Python y Arduino"
             />
           </div>
         </div>
@@ -173,7 +173,7 @@ const featureCards = [
 
 .corner-board-right {
   right: -120px;
-  transform: scaleX(-1);
+  transform: scaleX(1);
 
   animation:
     board-enter-right
@@ -204,7 +204,7 @@ const featureCards = [
     opacity: 0;
     transform:
       translate3d(36px, -22px, 0)
-      scaleX(-1)
+      scaleX(1)
       scale(0.96);
   }
 
@@ -212,7 +212,7 @@ const featureCards = [
     opacity: var(--board-opacity);
     transform:
       translate3d(0, 0, 0)
-      scaleX(-1)
+      scaleX(1)
       scale(1);
   }
 }
@@ -463,7 +463,7 @@ h1 {
   }
 
   .corner-board-right {
-    transform: scaleX(-1);
+    transform: scaleX(1);
   }
 
   .btn {

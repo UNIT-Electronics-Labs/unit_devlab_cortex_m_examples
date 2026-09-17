@@ -5,83 +5,64 @@ export default defineConfig({
     math: true,
   },
   base: process.env.BASE_PATH || '/',
-  title: 'ESP32-C6 Pulsar Labs',
-  description: 'Documentación de adquisición de datos e IoT con ESP32-C6 y Pulsar C6.',
+  title: 'Cortex-M · DevLab PY32F003',
+  description: 'Taller en español de compilación, programación SWD y validación de firmware con Arduino IDE y DevLab PY32F003.',
   lang: 'es-MX',
   cleanUrls: true,
   themeConfig: {
     nav: [
       { text: 'Inicio', link: '/' },
-      { text: 'Guías', link: '/guide/esp32c6' },
+      { text: 'Taller', link: '/guide/taller' },
+      { text: 'Primeros pasos con PY32F003', link: '/py32f003-getting-started/' },
       { text: 'Laboratorios', link: '/examples/' },
-      { text: 'Primeros pasos con Pulsar C6', link: '/pulsar-c6-getting-started/' }
+      { text: 'Recursos', link: '/py32f003-getting-started/recursos' }
     ],
     sidebar: [
       {
-        text: 'Configuración',
+        text: 'Taller Cortex-M',
         items: [
-          { text: 'ESP32-C6 & Pulsar C6', link: '/guide/esp32c6' },
-          { text: 'Configuración de escritorio', link: '/pulsar-c6-getting-started/01_setup' },
-          {
-            text: 'Código y entornos',
-            collapsed: false,
-            items: [
-              { text: 'Arduino IDE (C/C++)', link: '/pulsar-c6-getting-started/02_0_duino' },
-              { text: 'MicroPython (Thonny)', link: '/pulsar-c6-getting-started/env' },
-              { text: 'Librerías MicroPython', link: '/pulsar-c6-getting-started/02_lib' },
-              { text: 'ESP-IDF (Espressif C/C++)', link: '/guide/esp-idf' },
-              { text: 'ESP-IDF avanzado', link: '/pulsar-c6-getting-started/02_1_esp-idf' }
-            ]
-          }
+          { text: 'Plan del taller', link: '/guide/taller' },
+          { text: 'Arquitectura y firmware', link: '/guide/cortex-m' },
+          { text: 'Compilación y memoria', link: '/guide/compilacion' }
         ]
       },
       {
-        text: 'Primeros pasos con Pulsar C6',
+        text: 'Primeros pasos con PY32F003',
         items: [
-          { text: 'Índice', link: '/pulsar-c6-getting-started/' },
-          { text: 'Acerca de PULSAR C6', link: '/pulsar-c6-getting-started/00_about' },
-          { text: 'Pinout y esquemático', link: '/pulsar-c6-getting-started/03_pinout' },
-          { text: 'GPIO', link: '/pulsar-c6-getting-started/11_gpio' },
-          { text: 'ADC', link: '/pulsar-c6-getting-started/22_adc' },
-          { text: 'I²C', link: '/pulsar-c6-getting-started/33_i2c' },
-          { text: 'SPI y Micro SD', link: '/pulsar-c6-getting-started/44_spi' },
-          { text: 'WS2812 / NeoPixel', link: '/pulsar-c6-getting-started/55_neop' },
-          { text: 'Comunicación', link: '/pulsar-c6-getting-started/66_communication' },
-          { text: 'Conector JST SH', link: '/pulsar-c6-getting-started/jst' },
-          { text: 'Reporte de errores', link: '/pulsar-c6-getting-started/report' }
+          { text: 'Índice', link: '/py32f003-getting-started/' },
+          { text: 'Acerca de DevLab PY32F003', link: '/py32f003-getting-started/00_about' },
+          { text: 'Preparar la estación', link: '/py32f003-getting-started/01_setup' },
+          { text: 'Arduino IDE (C/C++)', link: '/py32f003-getting-started/02_0_duino' },
+          { text: 'Pinout y esquemático', link: '/py32f003-getting-started/03_pinout' },
+          { text: 'Programación SWD', link: '/py32f003-getting-started/04_swd' }
         ]
       },
       {
-        text: 'Conceptos Teóricos',
+        text: 'Periféricos',
         items: [
-          { text: 'Adquisición de Datos', link: '/guide/data-acquisition' },
-          { text: 'Sensores y Transductores', link: '/guide/sensors' },
-          { text: 'ADC y DAC', link: '/guide/adc-dac' },
-          { text: 'Acondicionamiento de Señal', link: '/guide/signal-conditioning' },
-          { text: 'Comunicación I²C', link: '/guide/i2c' },
-          { text: 'Comunicación SPI', link: '/guide/spi' },
-          { text: 'Wi-Fi y Bluetooth LE', link: '/guide/connectivity' },
-          { text: 'Zigbee', link: '/guide/zigbee' },
-          { text: 'Plataformas IoT', link: '/guide/iot-platforms' }
+          { text: 'GPIO y temporización', link: '/py32f003-getting-started/11_gpio' },
+          { text: 'ADC', link: '/py32f003-getting-started/22_adc' },
+          { text: 'I²C', link: '/py32f003-getting-started/33_i2c' },
+          { text: 'SPI', link: '/py32f003-getting-started/44_spi' },
+          { text: 'Comunicación UART', link: '/py32f003-getting-started/66_communication' }
         ]
       },
       {
-        text: 'Prácticas de Laboratorio',
+        text: 'Prácticas de laboratorio',
         items: [
-          { text: 'Índice', link: '/examples/' },
-          { text: 'Lab 1: Sensores I²C', link: '/examples/lab01-i2c-sensors' },
-          { text: 'Lab 2: Pantalla OLED', link: '/examples/lab02-oled-display' },
-          { text: 'Lab 3: ADC Analógico', link: '/examples/lab03-adc' },
-          { text: 'Lab 4: Publicación Wi-Fi', link: '/examples/lab04-wifi' },
-          { text: 'Lab 5: Bluetooth LE', link: '/examples/lab05-ble' },
-          { text: 'Lab 6: Zigbee', link: '/examples/lab06-zigbee-basic' },
-          { text: 'Lab 7: PULSAR Stick Red Zigbee', link: '/examples/labs07-zigbee-pulsar-stick' }
+          { text: 'Índice y descargas', link: '/examples/' },
+          { text: 'Lab 1: LED Blink', link: '/examples/lab01-blink' },
+          { text: 'Lab 2: Entrada digital', link: '/examples/lab02-gpio' },
+          { text: 'Lab 3: Comunicación UART', link: '/examples/lab03-uart' },
+          { text: 'Lab 4: Lectura ADC', link: '/examples/lab04-adc' },
+          { text: 'Lab 5: Falla y validación', link: '/examples/lab05-validacion' }
         ]
       },
       {
-        text: 'Kubi',
+        text: 'Material de apoyo',
         items: [
-          { text: 'Instalación y configuración', link: 'kubi/kubi.md' }
+          { text: 'Imágenes y documentos', link: '/py32f003-getting-started/recursos' },
+          { text: 'Solución de problemas', link: '/py32f003-getting-started/report' }
         ]
       }
     ],
@@ -127,7 +108,7 @@ export default defineConfig({
       next: 'Página siguiente'
     },
     footer: {
-      message: 'Prácticas de adquisición de datos e IoT con ESP32-C6.',
+      message: 'Taller de sistemas embebidos con ARM Cortex-M0+ y DevLab PY32F003.',
       copyright: 'MIT'
     }
   }

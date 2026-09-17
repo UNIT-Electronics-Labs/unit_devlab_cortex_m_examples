@@ -1,0 +1,4 @@
+estacion,fecha,ejemplo,version_paquete,variante,reloj,vcc,flash_bytes,ram_estatica_bytes,prueba,configuracion,resultado_esperado,resultado_observado,cumple,evidencia
+,,05_validacion,0.1.7,PY32F003x4,HSI 24 MHz,3.3 V,,,positiva,INYECTAR_FALLA=false,Alternancia cada 500 ms,,,
+,,05_validacion,0.1.7,PY32F003x4,HSI 24 MHz,3.3 V,,,negativa,INYECTAR_FALLA=true,LED apagado,,,
+,,05_validacion,0.1.7,PY32F003x4,HSI 24 MHz,3.3 V,,,recuperacion,INYECTAR_FALLA=false y reset,Vuelve el parpadeo,,,
